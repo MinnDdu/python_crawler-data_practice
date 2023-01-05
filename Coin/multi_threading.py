@@ -25,14 +25,20 @@ def close_price(url):
     dict = json.loads(data.content)
     return dict['data'][0]['Close']
 
-print(close_price(url[1]))
+# print(close_price(url[1]))
 
 # multi-processing 라이브러리
 # multiprocessing -> multi-processing 사용 / multiprocessing.dummy -> multi-threading 사용가능
 from multiprocessing.dummy import Pool as ThreadPool
 
 pool = ThreadPool(4)
-pool.map()
-#보통 close(), join() 세트로 많이 다님
+# 파이선 map() 과 비슷 - map(function, list)
+# a = time.time()
+result = pool.map(close_price, url)
+# b = time.time()
+
+print(result)
+# print(b - a)
+# 보통 close(), join() 세트로 많이 다님
 pool.close() # pool 작업 그만
 pool.join() # pool 결과 나올때까지 기다리기
