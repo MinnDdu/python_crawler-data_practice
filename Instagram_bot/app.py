@@ -61,7 +61,8 @@ time.sleep(5)
 
 for i in range(5):
     img = driver.find_elements(By.CSS_SELECTOR, '.x5yr21d.xu96u03.x10l6tqk.x13vifvy.x87ps6o.xh8yej3')[i].get_attribute('src')
+    # 특정 class 안에 class -> "".className1 .className2" (띄어쓰기가 구분) / class가 여러개임 -> ".className1.className2"
     r = str(i) + '.jpg'
     urllib.request.urlretrieve(img, r)
 
-# btn = driver.find_element('._abl-').click()
+# 이미지 다운을 너무 많이하면 어떤 사이트에서는 접속을 차단할 수도 있음... -> time.sleep등 이용해서 시간 조금 늦추기가 해결할수도?
