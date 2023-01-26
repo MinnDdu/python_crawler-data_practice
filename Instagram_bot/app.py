@@ -27,6 +27,7 @@ e = driver.find_element_by_css_selector('.x1lliihq').text # -> 태그안의 텍�
 print(e)
 # 인스타그램 자동로그인
 
+
 name = driver.find_element_by_css_selector('input[name="username"]')
 password = driver.find_element_by_css_selector('input[name="password"]')
 # time.sleep(1)
