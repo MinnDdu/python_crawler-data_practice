@@ -14,8 +14,6 @@ def naver_blog_ranking(query, amount):
         info.append(piece[i]['href'])
         result['Ranking ' + str(i+1)] = info
 
-
-
     return result
 
 print(naver_blog_ranking('자낳대', 10))

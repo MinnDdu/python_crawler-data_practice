@@ -1,4 +1,5 @@
-# making new file - open('path', 'w')
+ 
+ # making new file - open('path', 'w')
 # making new binary file - open('path', 'wb')
 file = open('a.txt', 'w')
 file.write('Hello guys!')

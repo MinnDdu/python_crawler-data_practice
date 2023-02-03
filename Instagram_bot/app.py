@@ -7,7 +7,6 @@ import urllib.request
 # 파이썬으로 웹 띄우기 - 크롬
 driver = webdriver.Chrome('/Users/minsoo/Desktop/Coding Apple/PythonCrawler/Instagram_bot/chromedriver')
 
-
 driver.get('http://instagram.com')
 # driver 에 url에 담긴 모든 글/그림 정보가 담겨있음
 driver.implicitly_wait(2) # driver가 알아서 기다려줌 (최대 10초)
