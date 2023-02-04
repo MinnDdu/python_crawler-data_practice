@@ -6,7 +6,7 @@ from pandas_datareader import data
 # 이 시계열 데이터의 추세, 흐름 파악 혹은 노이즈 제거를 위해 이동평균선 (moving average line)을 그려서 분석 많이함
 
 
-# 보통 싱시간 데이터는 웹크롤링을 통해 가져오지만 일별 데이터 같은 데이터는
+# 보통 실시간 데이터는 웹크롤링을 통해 가져오지만 일별 데이터 같은 데이터는
 # pandas_datareader로 쉽세 가져오기 가능 Ex) Yahoo Finance, Naver Finance
 # DataReader('종목', '소스', start='시작날짜', end='종료날짜')
 # df2 = data.DataReader('AAPL', 'yahoo', start='2019-01-01', end='2020-01-01')
@@ -70,20 +70,54 @@ plt.show()
 # 사이즈 키우기 - plt.figure(figsize=(10, 10)) == 인치 - plot() 하기 전에 사용
 
 
-
 # 직접 해보기
 # Q1 -  아마존 (종목코드 AMZN) 주식의 2020년 01월01일~12월31일 주식가격을 yahoo에서 가져온 후 20일, 60일 이동평균선을 그려보십시오. 
+import yfinance as yf
 
+yf.pdr_override() # <== that's all it takes :-)
 
+df_amazon = data.get_data_yahoo("AMZN", start="2020-01-01", end="2020-12-31")
+df_amazon
+df_rollings = pd.DataFrame({'rolling20': df_amazon['Close'].rolling(20).mean(), 'rolling60': df_amazon['Close'].rolling(60).mean()})
+df_rollings
 
+plt.plot(df_amazon.index, df_rollings['rolling20'])
+plt.plot(df_amazon.index, df_rollings['rolling60'])
+plt.show()
 
+# %%
 # Q2 - 두 기업의 연간 매출 데이터 그래프로 만들기
+import numpy as np
+df2 = pd.DataFrame({'': [2018, 2019, 2020, 2021], 
+                    'Samsung': [50000, 60000, 75000, 70000],
+                    'LG': [30000, 40000, 50000, 35000]})
+df2
+x_axis = np.array(df2[''])
+w = 0.3
+plt.bar(np.array([2018,2019,2020,2021]), df2['Samsung'], width=0.3)
+x_axis = x_axis + w
+plt.bar(np.array([2018,2019,2020,2021])+0.3, df2['LG'], width=0.3)
+plt.xlabel('Year')
+plt.ylabel('Sales')
+plt.legend(['Samsung', 'LG'])
+plt.show()
 
 
 
-
+# %%
 
 # Q3 - 원하는 데이터만 보이게 그래프를 조작하기
 # yahoo에서 2020년 01월01일~12월31일의 비트코인 가격을 가져오고 Close 가격을 그래프로 그리고 싶습니다. (종목코드 BTC-USD)
 # 근데 Volume항목 2020년의 평균 Volume보다 높은 날의 가격만 그래프로 그려보고 싶다면?
+btc_df = data.get_data_yahoo('BTC-USD', start='2020-01-01', end='2020-12-31')
+# btc_df
+avg_vol = btc_df['Volume'].mean()
 
+btc_df['tf'] = btc_df['Volume'] > avg_vol
+new_btc_df = btc_df[btc_df['tf'] == True]
+new_btc_df
+plt.bar(new_btc_df.index, new_btc_df['Close'])
+plt.show()
+
+
+# %%
