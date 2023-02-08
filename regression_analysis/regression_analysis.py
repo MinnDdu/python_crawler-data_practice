@@ -50,3 +50,18 @@ print(model.predict([[175], [183]]))
 plt.scatter(height, weight)
 plt.plot(height, model.predict(height))
 plt.show()
+
+
+# statsmodels 라이브러리 이용해서 통계 이쁘게 내기
+import statsmodels.api as sm
+
+# sm.OLS(y, x).fit()
+model2 = sm.OLS(weight, height).fit()
+print(model2.summary())
+
+# 회귀분석할 땐 특히 a(계수)가 0일 것이다라는 가설을 세우고 그걸 확률로 증명함
+# y = ax + b
+# R-squared (uncentered): 두 데이터가 얼마나 관련이 있는지
+# Prob (F-statistic): a 값이 0일 확률 == x와 y가 관련 없을 확률
+
+
