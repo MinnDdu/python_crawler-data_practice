@@ -10,6 +10,7 @@ print(df)
 
 
 # pandas series data도 가능
+# Ordinary Least Squares
 # [[year1, rooms1, bedrooms2], [year1, rooms1, bedrooms2], ...] 이런형태도 가능
 model = sm.OLS(df['price'], df[['year', 'rooms', 'bedrooms']]).fit()
 print(model.summary())
