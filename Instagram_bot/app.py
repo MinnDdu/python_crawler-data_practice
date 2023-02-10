@@ -30,8 +30,8 @@ print(e)
 name = driver.find_element_by_css_selector('input[name="username"]')
 password = driver.find_element_by_css_selector('input[name="password"]')
 # time.sleep(1)
-name.send_keys('01037342988') # 파라미터를 name에 보내줌
-password.send_keys('Irlaalstn12!')
+name.send_keys('YOUR_ID') # 파라미터를 name에 보내줌
+password.send_keys('YOUR_PASSWORD')
 # name.send_keys(Keys.ENTER) # 파라미터 안에 Keys.sth -> sth이 키보드 타자 의미 Keys.ENTER -> 키보드로 엔터 눌러줌
 # time.sleep(1)
 login = driver.find_element_by_css_selector('._acan._aiit._acap')
